@@ -36,6 +36,57 @@ class FileManager
             Console.WriteLine("Directory not found: " + newDirectory);
         }
     }
+    public void InfoAboutDirectory(string newDirectory)
+    {
+        string path = Path.Combine(currentDirectory, newDirectory);
+        if (Directory.Exists(path))
+        {
+        currentDirectory = path;
+
+        Console.WriteLine($"Название каталога: {path.Name}");
+        Console.WriteLine($"Дата создания каталога: {path.CreationDate}");
+        Console.WriteLine($"Размер каталога: {path.Lenght}");
+        }
+    }
+
+    public void InfoAboutFile(string NewFile)
+    {
+        string path = path.Combine(currentFile, newFile);
+        if (File.Exists(path))
+        {
+            currentFile = path;
+
+            Console.WriteLine($"Название файла: {path.Name}");
+            Console.WriteLine($"Дата создания файла: {path.CreationDate}");
+            Console.WriteLine($"Размер файла: {path.Lenght}");
+        }
+    }
+
+    public void CopyFile(string path, string newpath, string fileInf)
+    {
+        FileInfo fileInf = new FileInfo(path);
+
+        if (fileInf.Exists)
+        {
+            fileInf.CoptTo(newpath, true);
+        }
+    }
+
+    public void CopyDirectory(string Directory, string path, string newpath)
+    {
+       DirectoryInfo dirInf = new DirectoryInfo(path);
+
+       if (dirInf.Exists)
+       {
+        DirectoryInfo[] dirs = dirInf.GetDirectories();
+        Directory.CreateDirectory(newpath);
+        foreach (FileInfo file in dirInf.GetFiles())
+        {
+            string targetFilePath = Path.Combine(newpath, file.Name)
+            file.CopyTo(targetFilePath);
+        }
+       }
+    }
 }
 
 class Program
