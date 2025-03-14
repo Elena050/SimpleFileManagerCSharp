@@ -46,6 +46,7 @@ class FileManager
         Console.WriteLine($"Название каталога: {path.Name}");
         Console.WriteLine($"Дата создания каталога: {path.CreationDate}");
         Console.WriteLine($"Размер каталога: {path.Lenght}");
+        Console.WriteLine($"Время последнего изменения каталога: {path.LastWriteTime}")
         }
     }
 
@@ -58,7 +59,8 @@ class FileManager
 
             Console.WriteLine($"Название файла: {path.Name}");
             Console.WriteLine($"Дата создания файла: {path.CreationDate}");
-            Console.WriteLine($"Размер файла: {path.Lenght}");
+            Console.WriteLine($"Дата последнего изменения файла: {path.LastWriteDate}");
+            Console.WriteLine($"Атрибуты файла: {path.Attributes}")4
         }
     }
 
@@ -82,11 +84,37 @@ class FileManager
         Directory.CreateDirectory(newpath);
         foreach (FileInfo file in dirInf.GetFiles())
         {
-            string targetFilePath = Path.Combine(newpath, file.Name)
+            string targetFilePath = Path.Combine(newpath, file.Name);
             file.CopyTo(targetFilePath);
         }
        }
     }
+
+    public void DeleteDirectory(string path)
+    {
+        DirectoryInfo dirInf = new DirectoryInfo(path);
+
+        if (dirInf.Exists()):
+        {
+            dirInf.Delete(true);
+            Console.WriteLine("Каталог удален");
+        }
+
+        esle
+        {
+            Console.WriteLine("Каталога не существует");
+        }
+    }
+
+    public void DeleteFile(string path)
+    {
+        FileInfo fileInf = new FileInfo(path);
+        if (fileInf.Exists)
+        {
+            ileInf.Delete();
+        }
+    }
+    
 }
 
 class Program
